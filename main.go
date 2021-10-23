@@ -15,9 +15,11 @@ func main() {
 	logger := log.New(os.Stdout, "moodbase-server", log.LstdFlags)
 
 	healthHandler := handlers.NewHealth(logger)
+	productHandler := handlers.NewProductHandler(logger)
 
 	sm := http.NewServeMux()
 	sm.Handle("/health", healthHandler)
+	sm.Handle("/products", productHandler)
 
 	s := &http.Server{
 		Addr:         "127.0.0.1:9090",
